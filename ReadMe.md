@@ -1,19 +1,25 @@
 # boltdb-dump #
 
-Command to dump a human-readable BoltDB to stdout. This works with buckets at any level, not just the top-level.
+This is a fork of boltdb-dump(https://github.com/chilts/boltdb-dump), with
+changes to make it more generally useful.
 
-Note: currently this will only be readable with string keys and values such as JSON. If you're using MsgPack or
-Protocol Buffers for your values, then this program won't do what you want (yet).
+Command to dump a human-readable BoltDB to stdout. This works with buckets
+at any level, not just the top-level.
+
+Note: The main reason for the changes was to be able to dump binary keys and
+values.  If a key contains non-printable ASCII characters OR newlines, the
+hexdecimal encoding will be displayed.  If a value contains non-printable
+ASCII characters, output compatible with `hexdump -C` will be displayed.
 
 ## Install ##
 
 ```sh
-go get -u github.com/chilts/boltdb-dump
+go get -u github.com/yawning/boltdb-dump
 ```
 
 ## Usage ##
 
-There are (currently) no options, nor anythin fancy. Just pass the db file you want to dump:
+There are (currently) no options, nor anything fancy. Just pass the db file you want to dump:
 
 ```sh
 boltdb-dump database.db
@@ -41,9 +47,10 @@ An example of a blog site with users and domains:
 ## Author ##
 
 [Andrew Chilton](https://chilts.org/) - [@andychilton](https://twitter.com/andychilton).
+Yawning Angel
 
 ## License ##
 
-[MIT](https://chilts.mit-license.org/2016/).
+MIT.
 
 (Ends)
